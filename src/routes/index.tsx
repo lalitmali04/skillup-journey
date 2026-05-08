@@ -74,6 +74,9 @@ function Landing() {
       {/* SKILLS */}
       <section id="skills" className="relative px-4 py-24">
         <Header eyebrow="Skill Tracks" title="Eight roadmaps to your next level" />
+        <p className="mx-auto mt-4 max-w-xl text-center text-sm text-muted-foreground">
+          Tap a card to jump straight into a hand-picked YouTube playlist. Opens in a new tab.
+        </p>
         <div className="mx-auto mt-14 grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {skills.map((s, i) => (
             <a
@@ -81,19 +84,44 @@ function Landing() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group glass rounded-2xl p-6 hover:-translate-y-2 transition animate-fade-up block"
+              aria-label={`Open ${s.name} playlist on YouTube`}
+              className="group relative block rounded-2xl p-[1px] animate-fade-up overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon)]"
               style={{ animationDelay: `${i * 60}ms` }}
             >
-              <div className="h-12 w-12 rounded-xl grid place-items-center mb-4 group-hover:animate-glow-pulse"
-                style={{ background: `linear-gradient(135deg, ${s.color}, transparent)`, border: `1px solid ${s.color}` }}>
-                <s.Icon className="h-6 w-6" style={{ color: s.color }} />
-              </div>
-              <h3 className="font-bold text-lg">{s.name}</h3>
-              <p className="text-sm text-muted-foreground mt-1.5">{s.desc}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {s.tools.slice(0,3).map(t => (
-                  <span key={t} className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-white/5 border border-white/10">{t}</span>
-                ))}
+              {/* animated gradient border */}
+              <span
+                aria-hidden
+                className="absolute inset-0 rounded-2xl opacity-50 group-hover:opacity-100 transition duration-500"
+                style={{ background: `conic-gradient(from 180deg at 50% 50%, ${s.color}, transparent 40%, ${s.color} 80%)` }}
+              />
+              <div className="relative h-full glass-strong rounded-2xl p-6 transition duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_60px_-10px_var(--tw-shadow-color)]"
+                style={{ ['--tw-shadow-color' as any]: s.color }}>
+                {/* glow blob */}
+                <div className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition duration-700"
+                  style={{ background: s.color }} />
+
+                <div className="flex items-start justify-between">
+                  <div className="h-12 w-12 rounded-xl grid place-items-center transition duration-500 group-hover:rotate-6 group-hover:scale-110"
+                    style={{ background: `linear-gradient(135deg, ${s.color}, transparent)`, border: `1px solid ${s.color}`, boxShadow: `0 0 24px -4px ${s.color}` }}>
+                    <s.Icon className="h-6 w-6" style={{ color: s.color }} />
+                  </div>
+                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition duration-500">
+                    Watch ↗
+                  </span>
+                </div>
+
+                <h3 className="mt-4 font-bold text-lg group-hover:text-gradient transition">{s.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1.5">{s.desc}</p>
+
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {s.tools.slice(0,3).map(t => (
+                    <span key={t} className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-white/5 border border-white/10">{t}</span>
+                  ))}
+                </div>
+
+                {/* underline reveal */}
+                <div className="mt-5 h-[2px] w-0 group-hover:w-full transition-all duration-500 rounded-full"
+                  style={{ background: `linear-gradient(90deg, ${s.color}, transparent)` }} />
               </div>
             </a>
           ))}
