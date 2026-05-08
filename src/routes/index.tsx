@@ -76,9 +76,12 @@ function Landing() {
         <Header eyebrow="Skill Tracks" title="Eight roadmaps to your next level" />
         <div className="mx-auto mt-14 grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {skills.map((s, i) => (
-            <div
+            <a
               key={s.id}
-              className="group glass rounded-2xl p-6 hover:-translate-y-2 transition animate-fade-up"
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group glass rounded-2xl p-6 hover:-translate-y-2 transition animate-fade-up block"
               style={{ animationDelay: `${i * 60}ms` }}
             >
               <div className="h-12 w-12 rounded-xl grid place-items-center mb-4 group-hover:animate-glow-pulse"
@@ -92,13 +95,13 @@ function Landing() {
                   <span key={t} className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full bg-white/5 border border-white/10">{t}</span>
                 ))}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section id="features" className="relative px-4 py-24">
+      {/* FEATURES — hidden per request, kept in code */}
+      <section id="features" className="relative px-4 py-24 hidden">
         <Header eyebrow="Why SkillUp" title="A learning OS that keeps you consistent" />
         <div className="mx-auto mt-14 grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3">
           <Feature Icon={Flame} title="Daily Streaks" desc="Build a habit. Don't break the chain. Earn XP for showing up." color="var(--neon-2)" />
