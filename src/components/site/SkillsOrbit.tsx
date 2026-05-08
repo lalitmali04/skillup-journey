@@ -37,7 +37,7 @@ export function SkillsOrbit() {
             style={{ transform: `translate(${x}px, ${y}px) translate(-50%,-50%)`, animationDelay: `${idx * 0.3}s` }}
           >
             <div className="glass rounded-2xl p-3 flex flex-col items-center gap-1 w-20 hover:scale-110 transition-transform cursor-pointer">
-              <s.Icon className="h-6 w-6" style={{ color: ``var(--neon${["","-2","-3"][idx%3]})`` }} />
+              <s.Icon className="h-6 w-6" style={{ color: s.c }} />
               <span className="text-[10px] font-medium">{s.label}</span>
             </div>
           </div>
